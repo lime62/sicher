@@ -1,6 +1,5 @@
 # src/__init__.py
 
 # Importing submodules to make them available when `src` is imported
-from .utils import register
-from .encryption import encrypt, decrypt
+from .password_manager import register, login, storeAccount, queryAccounts
 from .database import add_account, retrieve_accounts
