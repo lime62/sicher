@@ -1,9 +1,9 @@
 import sys
 sys.path.append('C:\\Users\\Margaret\\Documents\\GitHub\\sicherdet\\sicher\\')
 
-from src.utils import register
-from src.database import initialize_tables, get_user_by_id
+from src.utils import register, login
 
-# initialize_tables()
-print("Program starting")
-# register()
+if login():
+  print('Login sucessful!')
+else:
+  print('Login unsucessful!')
