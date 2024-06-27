@@ -22,7 +22,6 @@ def register():
       else:
         print("Username must be between 4 and 15 characters")
 
-
   flag = False
   while(flag != True):
     password = input("Enter your master password: ")
@@ -53,11 +52,13 @@ def login():
         return pass_hash == getMasterPassword(username)
       else:
           print('Password is not in the correct format.')
+          return False
     else:
       print('Username is not in the correct format.')
+      return False
   else:
     print('Username does not exist.')
-
+    return False
 
 def storeAccount():
   app = input("Enter application (website/app): ")
@@ -65,5 +66,12 @@ def storeAccount():
   password = input("Enter password for that account: ")
   add_account(app, account, password)
 
-def queryAccounts():
-  print(retrieve_accounts(getUsername()))
+def getAccounts():
+  username = input("Confirm your username: ")
+  password = input("Confirm your master password: ")
+  salted_pass = getSalt(username) + password.encode('utf-8')
+  hashed_obj = hashlib.sha256(salted_pass)
+  pass_hash = hashed_obj.hexdigest()
+  if(pass_hash == getMasterPassword(username)):
+    retrieve_accounts(pass_hash)
+  
